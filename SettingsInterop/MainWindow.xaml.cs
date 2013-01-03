@@ -64,5 +64,14 @@ namespace SettingsInterop
 		{
 			this.Close();
 		}
+
+		private void OnMenuItemAboutClick(object sender, EventArgs e)
+		{
+			AboutWindow2.ShowAboutWindow(new System.Collections.ObjectModel.ObservableCollection<DisplayItem>()
+			{
+				new DisplayItem("Author", "Francois Hill"),
+				new DisplayItem("Icon(s) obtained from", null)
+			});
+		}
 	}
 }

@@ -20,6 +20,9 @@ namespace SettingsInterop
 
 			SharedClasses.AutoUpdating.CheckForUpdates_ExceptionHandler();
 			//SharedClasses.AutoUpdating.CheckForUpdates(null, null, true);
+
+			SettingsInterop.MainWindow mw = new MainWindow();
+			mw.ShowDialog();
 		}
 	}
 }

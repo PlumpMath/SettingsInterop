@@ -16,6 +16,9 @@
 				<forms:MenuItem Text='Show'
 								Click='OnMenuItemShowClick'
 								DefaultItem='True' />
+				<forms:MenuItem Text='-' />
+				<forms:MenuItem Text='About'
+								Click='OnMenuItemAboutClick' />
 				<forms:MenuItem Text="-" />
 				<forms:MenuItem Text="Exit"
 								Click="OnMenuItemExitClick" />

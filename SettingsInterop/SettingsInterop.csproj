@@ -126,6 +126,9 @@
     <Compile Include="..\..\SharedClasses\Generics.cs">
       <Link>Generics.cs</Link>
     </Compile>
+    <Compile Include="..\..\SharedClasses\Logging.cs">
+      <Link>Logging.cs</Link>
+    </Compile>
     <Compile Include="..\..\SharedClasses\NotifyIconWPF.cs">
       <Link>NotifyIconWPF.cs</Link>
     </Compile>

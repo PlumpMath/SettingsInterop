@@ -28,23 +28,31 @@ namespace SettingsInterop
 			InitializeComponent();
 		}
 
+		private bool alreadyShowingPropertiesEditor = false;
 		private void ShowSettingsEditor()
 		{
-			List<object> objList;
-			Dictionary<IInterceptorNotifiable, Dictionary<PropertyInfo, object>> objectsAndPropertyValues;
-			if (!SettingsSimple.GetListOfOnlineSettings(out objList, out objectsAndPropertyValues))
-				return;//Exit if could not get list
+			if (alreadyShowingPropertiesEditor)
+				return;
+			alreadyShowingPropertiesEditor = true;
 
-			if (pe == null)
-				pe = new PropertiesEditor(objList);
-			else
-				pe.PopulateList(objList);
-			pe.ShowDialog();
-			pe = null;
-			objList.Clear();
-			objList = null;
-
-			SettingsSimple.ProcessPropertyCompareToPrevious(objectsAndPropertyValues);
+			try
+			{
+				if (!SettingsSimple.UseOnlineListAndSaveIfChanged(
+					(objList) =>
+					{
+						if (pe == null)
+							pe = new PropertiesEditor(objList);
+						else
+							pe.PopulateList(objList);
+						pe.ShowDialog();
+						pe = null;
+					}))
+					return;
+			}
+			finally
+			{
+				alreadyShowingPropertiesEditor = false;
+			}
 		}
 
 		private void OnNotificationArayIconMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -62,6 +70,8 @@ namespace SettingsInterop
 
 		private void OnMenuItemExitClick(object sender, EventArgs e)
 		{
+			if (pe != null && pe.IsVisible)
+				pe.Close();
 			this.Close();
 		}
 
